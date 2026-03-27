@@ -1,0 +1,27 @@
+# Dépendances
+node_modules/
+
+# Build
+dist/
+build/
+.angular/
+
+# Base de données SQLite
+backend/db/*.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environnement
+.env*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.tmp

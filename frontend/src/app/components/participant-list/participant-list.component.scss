@@ -1,0 +1,47 @@
+// Liste des participants
+
+.participant-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.participant-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--midivote-accent);
+  }
+}
+
+.counter {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--midivote-text);
+}
+
+.participant-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-initial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--midivote-accent);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 4px;
+}

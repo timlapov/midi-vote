@@ -1,50 +1,114 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+  Sync Impact Report
+  ==================
+  Version change: N/A → 1.0.0 (initial ratification)
+  Modified principles: N/A (first version)
+  Added sections: Core Principles (5), Contraintes techniques,
+                  Workflow de développement, Governance
+  Removed sections: N/A
+  Templates requiring updates:
+    - .specify/templates/plan-template.md ✅ compatible (Constitution Check
+      section already generic)
+    - .specify/templates/spec-template.md ✅ compatible (no auth-specific
+      mandatory sections)
+    - .specify/templates/tasks-template.md ✅ compatible (phase structure
+      aligns with principles)
+  Follow-up TODOs: none
+-->
+
+# MidiVote Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Simplicité avant tout
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+- Chaque fonctionnalité DOIT être implémentée de la manière la plus
+  simple possible. Pas de sur-ingénierie.
+- Le principe YAGNI (You Ain't Gonna Need It) est appliqué
+  systématiquement : aucune abstraction ou couche supplémentaire
+  n'est ajoutée sans besoin concret et immédiat.
+- En cas de doute entre deux approches, la plus courte et la plus
+  directe DOIT être choisie.
+- Les dépendances externes DOIVENT être limitées au strict nécessaire.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Français partout
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+- Toute la documentation (specs, plans, tâches, README) DOIT être
+  rédigée en français.
+- Les commentaires dans le code DOIVENT être en français.
+- Les messages de commit DOIVENT être en français.
+- Les noms de variables, fonctions et fichiers restent en anglais
+  (convention technique standard).
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Identité légère côté client
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+- L'identité de l'utilisateur est gérée exclusivement côté client
+  via `localStorage`.
+- Il n'y a PAS de système d'authentification serveur (pas de JWT,
+  pas de sessions serveur, pas de base de données utilisateurs).
+- L'utilisateur choisit ou génère un identifiant simple (pseudo)
+  stocké localement.
+- Cette approche est un choix délibéré de simplicité : la confiance
+  est accordée au client.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Interface soignée et moderne
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- L'interface utilisateur DOIT être visuellement soignée, moderne
+  et responsive.
+- Les transitions et animations DOIVENT être présentes pour offrir
+  une expérience fluide et agréable.
+- L'UI DOIT être intuitive : un nouvel utilisateur DOIT pouvoir
+  comprendre le fonctionnement sans explication.
+- Le design DOIT fonctionner sur mobile et desktop.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Fiabilité
+
+- Le code DOIT être robuste : les cas limites courants DOIVENT être
+  gérés (réseau indisponible, localStorage plein, données corrompues).
+- Les erreurs DOIVENT être présentées de manière claire et
+  compréhensible à l'utilisateur.
+- L'état de l'application DOIT rester cohérent même en cas de
+  rechargement de page ou de perte de connexion temporaire.
+- La simplicité du système DOIT servir la fiabilité : moins de
+  composants = moins de points de défaillance.
+
+## Contraintes techniques
+
+- **Type d'application** : application web collaborative (frontend +
+  backend léger).
+- **Pas d'authentification complexe** : toute proposition incluant
+  OAuth, JWT, sessions serveur ou base utilisateurs DOIT être
+  refusée sauf décision explicite d'amendement.
+- **Stockage client** : `localStorage` est le mécanisme principal
+  pour les données utilisateur côté client.
+- **Temps réel** : les mises à jour entre utilisateurs DOIVENT être
+  réactives (WebSocket, SSE ou polling court selon le contexte).
+- **Déploiement** : l'application DOIT pouvoir être déployée
+  simplement, sans infrastructure lourde.
+
+## Workflow de développement
+
+- Chaque fonctionnalité est spécifiée via le système Specify
+  (spec → plan → tâches → implémentation).
+- Les commits DOIVENT être atomiques et décrire clairement le
+  changement effectué, en français.
+- Le code DOIT être lisible et auto-documenté autant que possible ;
+  les commentaires complètent mais ne remplacent pas un code clair.
+- Avant chaque implémentation, vérifier la conformité avec les
+  principes de cette constitution (Constitution Check dans le plan).
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- Cette constitution est le document de référence pour toutes les
+  décisions architecturales et de développement du projet MidiVote.
+- Tout amendement DOIT être documenté avec une justification, et
+  le numéro de version DOIT être incrémenté selon le versionnement
+  sémantique :
+  - **MAJEUR** : suppression ou redéfinition incompatible d'un
+    principe.
+  - **MINEUR** : ajout d'un principe ou extension significative.
+  - **PATCH** : clarifications, corrections de formulation.
+- La conformité aux principes DOIT être vérifiée lors de chaque
+  revue de code ou plan d'implémentation.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version** : 1.0.0 | **Ratification** : 2026-03-26 | **Dernière modification** : 2026-03-26

@@ -1,0 +1,66 @@
+<mat-card @cardAnimation class="proposal-card"
+          [class.is-participant]="isParticipant()">
+  <mat-card-header>
+    <mat-card-title>{{ proposal.restaurantName }}</mat-card-title>
+    <mat-card-subtitle>
+      <span class="cuisine-type">{{ proposal.cuisineType }}</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="card-details">
+      <div class="detail-row">
+        <mat-icon>schedule</mat-icon>
+        <span>Départ à {{ proposal.departureTime }}</span>
+      </div>
+
+      <div class="detail-row">
+        <mat-icon>{{ mealFormatIcon }}</mat-icon>
+        <span>{{ mealFormatLabel }}</span>
+      </div>
+
+      <div class="detail-row links">
+        <a [href]="proposal.googleMapsLink" target="_blank" rel="noopener">
+          <mat-icon>map</mat-icon> Voir sur la carte
+        </a>
+        @if (proposal.menuLink) {
+          <a [href]="proposal.menuLink" target="_blank" rel="noopener">
+            <mat-icon>menu_book</mat-icon> Menu
+          </a>
+        }
+      </div>
+
+      @if (proposal.comment) {
+        <div class="detail-row comment">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <span>{{ proposal.comment }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="author-info">
+      Proposé par <strong>{{ proposal.authorFirstName }} {{ proposal.authorLastName }}</strong>
+    </div>
+
+    <app-participant-list [participants]="proposal.participants" />
+  </mat-card-content>
+
+  <mat-card-actions>
+    @if (canJoin()) {
+      <button mat-flat-button color="primary" (click)="onJoin()">
+        <mat-icon>group_add</mat-icon> Rejoindre
+      </button>
+    }
+    @if (canLeave()) {
+      <button mat-stroked-button (click)="onLeave()">
+        <mat-icon>exit_to_app</mat-icon> Quitter
+      </button>
+    }
+    @if (canDelete()) {
+      <button mat-button color="warn" (click)="onDelete()"
+              matTooltip="Supprimer cette proposition">
+        <mat-icon>delete</mat-icon>
+      </button>
+    }
+  </mat-card-actions>
+</mat-card>

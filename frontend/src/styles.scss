@@ -1,0 +1,82 @@
+// Thème personnalisé MidiVote
+// Police Poppins + couleur d'accent #4098DB (RGB 64, 152, 219)
+@use '@angular/material' as mat;
+
+// Import de la police Poppins
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Palette personnalisée basée sur #4098DB
+$midivote-primary: (
+  50: #e8f1fa,
+  100: #c5ddf2,
+  200: #9fc6e9,
+  300: #79b0e0,
+  400: #5ca0da,
+  500: #4098db,
+  600: #3a8ad0,
+  700: #3278c0,
+  800: #2a67b0,
+  900: #1c4a93,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Poppins,
+      density: 0,
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font-family: 'Poppins', sans-serif;
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
+
+// Variables globales MidiVote
+:root {
+  --midivote-accent: #4098db;
+  --midivote-accent-light: #79b0e0;
+  --midivote-accent-dark: #2a67b0;
+  --midivote-bg: #f5f7fa;
+  --midivote-card-bg: #ffffff;
+  --midivote-text: #2c3e50;
+  --midivote-text-light: #7f8c8d;
+}
+
+// Surcharge globale de la police
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+// Styles globaux
+a {
+  color: var(--midivote-accent);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

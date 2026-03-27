@@ -1,0 +1,17 @@
+<div class="participant-section">
+  <div class="participant-header">
+    <mat-icon>group</mat-icon>
+    <span class="counter" [@counterAnim]="participants.length">
+      {{ participants.length }} participant{{ participants.length > 1 ? 's' : '' }}
+    </span>
+  </div>
+
+  <div class="participant-chips">
+    @for (participant of participants; track trackByUserId($index, participant)) {
+      <mat-chip @participantAnim>
+        <span class="chip-initial">{{ participant.firstName.charAt(0) }}</span>
+        {{ participant.firstName }} {{ participant.lastName }}
+      </mat-chip>
+    }
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<app-day-banner />
+
+@if (networkErrorService.visible()) {
+  <div class="network-error-banner">
+    <mat-icon>wifi_off</mat-icon>
+    <span>{{ networkErrorService.message() }}</span>
+  </div>
+}
+
+<div class="home-container">
+  <header class="day-header">
+    <h1>PROPOSITIONS DE DÉJEUNER — {{ pollingService.displayLabel() }}</h1>
+  </header>
+
+  <div class="actions-bar">
+    <button mat-fab extended color="primary" (click)="openProposalForm()">
+      <mat-icon>add_circle</mat-icon>
+      Proposer un restaurant
+    </button>
+  </div>
+
+  @if (pollingService.proposals()?.proposals?.length) {
+    <div class="proposals-grid">
+      @for (proposal of pollingService.proposals()!.proposals; track proposal.id) {
+        <app-proposal-card
+          [proposal]="proposal"
+          (join)="onJoin($event)"
+          (leave)="onLeave($event)"
+          (delete)="onDelete($event)" />
+      }
+    </div>
+  } @else if (!pollingService.loading()) {
+    <div class="empty-state">
+      <mat-icon>restaurant_menu</mat-icon>
+      <h2>Aucune proposition pour le moment</h2>
+      <p>Sois le premier à proposer un restaurant pour le déjeuner !</p>
+    </div>
+  }
+</div>

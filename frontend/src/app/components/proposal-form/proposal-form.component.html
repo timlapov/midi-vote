@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>
+  <mat-icon>restaurant</mat-icon>
+  Proposer un restaurant
+</h2>
+
+<mat-dialog-content>
+  <form class="proposal-form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom du restaurant</mat-label>
+      <input matInput [(ngModel)]="restaurantName" name="restaurantName" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type de cuisine</mat-label>
+      <input matInput [(ngModel)]="cuisineType" name="cuisineType"
+             placeholder="japonais, italien, brasserie..." required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Lien Google Maps</mat-label>
+      <input matInput [(ngModel)]="googleMapsLink" name="googleMapsLink"
+             type="url" required>
+      <mat-icon matSuffix>map</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Lien vers le menu (optionnel)</mat-label>
+      <input matInput [(ngModel)]="menuLink" name="menuLink" type="url">
+      <mat-icon matSuffix>menu_book</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Heure de départ</mat-label>
+      <input matInput [(ngModel)]="departureTime" name="departureTime"
+             type="time" min="12:00" max="14:00" required>
+      <mat-icon matSuffix>schedule</mat-icon>
+    </mat-form-field>
+
+    <div class="meal-format">
+      <label class="format-label">Format du repas :</label>
+      <mat-radio-group [(ngModel)]="mealFormat" name="mealFormat">
+        <mat-radio-button value="sur_place">
+          <mat-icon>restaurant</mat-icon> Sur place
+        </mat-radio-button>
+        <mat-radio-button value="a_emporter">
+          <mat-icon>takeout_dining</mat-icon> À emporter
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Commentaire (optionnel)</mat-label>
+      <textarea matInput [(ngModel)]="comment" name="comment" rows="2"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-flat-button color="primary"
+          [disabled]="!isValid || submitting"
+          (click)="onSubmit()">
+    {{ submitting ? 'Envoi...' : 'Proposer' }}
+  </button>
+</mat-dialog-actions>

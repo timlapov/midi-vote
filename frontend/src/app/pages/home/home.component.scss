@@ -1,0 +1,78 @@
+// Page principale — layout responsive
+
+.home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+.day-header {
+  text-align: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--midivote-text);
+    letter-spacing: 0.5px;
+  }
+}
+
+.actions-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.proposals-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 64px 16px;
+  color: var(--midivote-text-light);
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--midivote-accent-light);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+}
+
+.network-error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #e74c3c;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+}
+
+// Responsive mobile
+@media (max-width: 600px) {
+  .home-container {
+    padding: 16px 12px 72px;
+  }
+
+  .day-header h1 {
+    font-size: 1.1rem;
+  }
+}
